@@ -1,0 +1,171 @@
+[
+  {
+    "id": "floor1",
+    "name": "Floor 1",
+    "image": "floor1.png",
+    "beacons": [
+      {
+        "id": "00000000-0000-0000-0000-000000000000_1_1",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "major": 1,
+        "minor": 1,
+        "x": 100,
+        "y": 200,
+        "location": "Main Entrance"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000000_1_2",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "major": 1,
+        "minor": 2,
+        "x": 250,
+        "y": 150,
+        "location": "Emergency Room"
+      }
+    ],
+    "clinics": [
+      {
+        "id": "entrance",
+        "name": "Main Entrance",
+        "category": "General",
+        "x": 100,
+        "y": 200,
+        "description": "Hospital main entrance and information desk"
+      },
+      {
+        "id": "reception",
+        "name": "Reception",
+        "category": "General",
+        "x": 150,
+        "y": 180,
+        "description": "Patient registration and check-in"
+      },
+      {
+        "id": "emergency",
+        "name": "Emergency Room",
+        "category": "Emergency",
+        "x": 250,
+        "y": 150,
+        "description": "24/7 emergency medical services"
+      },
+      {
+        "id": "cafeteria",
+        "name": "Cafeteria",
+        "category": "Amenities",
+        "x": 180,
+        "y": 300,
+        "description": "Food and refreshments"
+      },
+      {
+        "id": "pharmacy",
+        "name": "Pharmacy",
+        "category": "Amenities",
+        "x": 220,
+        "y": 250,
+        "description": "Prescription and over-the-counter medications"
+      }
+    ]
+  },
+  {
+    "id": "floor2",
+    "name": "Floor 2",
+    "image": "floor2.png",
+    "beacons": [
+      {
+        "id": "00000000-0000-0000-0000-000000000000_2_1",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "major": 2,
+        "minor": 1,
+        "x": 120,
+        "y": 150,
+        "location": "Cardiology Department"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000000_2_2",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "major": 2,
+        "minor": 2,
+        "x": 220,
+        "y": 180,
+        "location": "Radiology Department"
+      }
+    ],
+    "clinics": [
+      {
+        "id": "cardiology",
+        "name": "Cardiology Department",
+        "category": "Medical",
+        "x": 120,
+        "y": 150,
+        "description": "Heart and cardiovascular care"
+      },
+      {
+        "id": "radiology",
+        "name": "Radiology Department",
+        "category": "Medical",
+        "x": 220,
+        "y": 180,
+        "description": "X-rays, MRI, CT scans and imaging services"
+      },
+      {
+        "id": "laboratory",
+        "name": "Laboratory",
+        "category": "Medical",
+        "x": 180,
+        "y": 250,
+        "description": "Blood tests and sample analysis"
+      }
+    ]
+  },
+  {
+    "id": "floor3",
+    "name": "Floor 3",
+    "image": "floor3.png",
+    "beacons": [
+      {
+        "id": "00000000-0000-0000-0000-000000000000_3_1",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "major": 3,
+        "minor": 1,
+        "x": 150,
+        "y": 150,
+        "location": "Surgery Wing"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000000_3_2",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "major": 3,
+        "minor": 2,
+        "x": 250,
+        "y": 200,
+        "location": "Pediatrics Department"
+      }
+    ],
+    "clinics": [
+      {
+        "id": "surgery",
+        "name": "Surgery Wing",
+        "category": "Medical",
+        "x": 150,
+        "y": 150,
+        "description": "Surgical procedures and recovery"
+      },
+      {
+        "id": "pediatrics",
+        "name": "Pediatrics Department",
+        "category": "Medical",
+        "x": 250,
+        "y": 200,
+        "description": "Children's healthcare services"
+      },
+      {
+        "id": "icu",
+        "name": "Intensive Care Unit",
+        "category": "Medical",
+        "x": 180,
+        "y": 280,
+        "description": "Critical care for seriously ill patients"
+      }
+    ]
+  }
+]
