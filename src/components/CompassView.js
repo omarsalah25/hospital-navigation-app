@@ -1,11 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const CompassView = ({ heading, destination, distance }) => {
   // Calculate the rotation angle for the compass arrow
-  // In a real app, this would use the device's compass and the destination coordinates
-  // For this POC, we'll use a mock heading value
   const arrowRotation = { transform: [{ rotate: `${heading}deg` }] };
 
   return (
@@ -18,19 +16,25 @@ const CompassView = ({ heading, destination, distance }) => {
             <Text style={[styles.directionText, styles.southText]}>S</Text>
             <Text style={[styles.directionText, styles.westText]}>W</Text>
           </View>
-          
+
           {/* Compass arrow pointing to destination */}
           <View style={[styles.compassArrow, arrowRotation]}>
-            <Ionicons name="arrow-up" size={40} color="#FF5252" />
+            <Text>
+              <Ionicons name="arrow-up" size={40} color="#FF5252" />
+            </Text>
           </View>
         </View>
       </View>
-      
+
       <View style={styles.infoContainer}>
-        <Text style={styles.destinationText}>{destination || 'No destination selected'}</Text>
+        <Text style={styles.destinationText}>
+          {destination || 'No destination selected'}
+        </Text>
         {distance && (
           <Text style={styles.distanceText}>
-            {typeof distance === 'number' ? `${distance.toFixed(1)} meters away` : distance}
+            {typeof distance === 'number'
+              ? `${distance.toFixed(1)} meters away`
+              : distance}
           </Text>
         )}
       </View>

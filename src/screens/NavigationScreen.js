@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const NavigationScreen = ({ 
-  origin, 
-  destination, 
+const NavigationScreen = ({
+  origin,
+  destination,
   currentFloor,
   distance,
   onBackPress,
@@ -14,76 +14,76 @@ const NavigationScreen = ({
   const [currentStep, setCurrentStep] = useState(0);
   const [remainingDistance, setRemainingDistance] = useState(distance || 0);
   const [estimatedTime, setEstimatedTime] = useState(0);
-  
+
   // Generate navigation steps based on origin and destination
   useEffect(() => {
     if (!origin || !destination) return;
-    
+
     // In a real app, this would use pathfinding algorithms
     // For this POC, we'll generate mock steps
     const mockSteps = generateMockSteps(origin, destination);
     setSteps(mockSteps);
-    
+
     // Calculate estimated time (assuming 1.2m/s walking speed)
     const time = Math.ceil(distance / 1.2);
     setEstimatedTime(time);
   }, [origin, destination]);
-  
+
   // Simulate progress for the POC
   useEffect(() => {
     if (steps.length === 0) return;
-    
+
     const interval = setInterval(() => {
       // Reduce remaining distance
       setRemainingDistance(prev => {
         const newDistance = Math.max(0, prev - 0.5);
-        
+
         // If we've reached the destination
         if (newDistance === 0 && onArrival) {
           clearInterval(interval);
           onArrival();
         }
-        
+
         return newDistance;
       });
-      
+
       // Advance to next step occasionally
       if (Math.random() > 0.8 && currentStep < steps.length - 1) {
         setCurrentStep(prev => prev + 1);
       }
     }, 1000);
-    
+
     return () => clearInterval(interval);
   }, [steps]);
-  
+
   // Generate mock navigation steps
   const generateMockSteps = (origin, destination) => {
     // In a real app, this would use actual pathfinding
     const sameFloor = origin.floor === destination.floor;
-    
+
     if (sameFloor) {
       return [
-        { 
-          id: 1, 
-          instruction: `Start walking from ${origin.name}`, 
+        {
+          id: 1,
+          instruction: `Start walking from ${origin.name}`,
           icon: 'walk-outline',
           distance: distance * 0.2
         },
-        { 
-          id: 2, 
-          instruction: `Continue straight ahead`, 
+        {
+          id: 2,
+          instruction: `Continue straight ahead`,
           icon: 'arrow-forward-outline',
           distance: distance * 0.3
         },
-        { 
-          id: 3, 
-          instruction: `Turn right at the corridor`, 
+        {
+          id: 3,
+          instruction: `Turn right at the corridor`,
           icon: 'arrow-forward-outline',
           distance: distance * 0.3
         },
-        { 
-          id: 4, 
-          instruction: `${destination.name} will be on your left`, 
+        {
+          id: 4,
+          instruction: `${destination.name} will be on your left`,
           icon: 'location-outline',
           distance: distance * 0.2
         },
@@ -93,48 +93,48 @@ const NavigationScreen = ({
       const floorDiff = destination.floor - origin.floor;
       const direction = floorDiff > 0 ? 'up' : 'down';
       const floors = Math.abs(floorDiff);
-      
+
       return [
-        { 
-          id: 1, 
-          instruction: `Start walking from ${origin.name}`, 
+        {
+          id: 1,
+          instruction: `Start walking from ${origin.name}`,
           icon: 'walk-outline',
           distance: distance * 0.15
         },
-        { 
-          id: 2, 
-          instruction: `Head to the nearest elevator or stairs`, 
+        {
+          id: 2,
+          instruction: `Head to the nearest elevator or stairs`,
           icon: 'arrow-forward-outline',
           distance: distance * 0.25
         },
-        { 
-          id: 3, 
-          instruction: `Go ${direction} ${floors} floor${floors > 1 ? 's' : ''}`, 
+        {
+          id: 3,
+          instruction: `Go ${direction} ${floors} floor${floors > 1 ? 's' : ''}`,
           icon: direction === 'up' ? 'arrow-up-outline' : 'arrow-down-outline',
           distance: distance * 0.2
         },
-        { 
-          id: 4, 
-          instruction: `Exit the elevator and turn left`, 
+        {
+          id: 4,
+          instruction: `Exit the elevator and turn left`,
           icon: 'arrow-forward-outline',
           distance: distance * 0.2
         },
-        { 
-          id: 5, 
-          instruction: `Continue straight ahead`, 
+        {
+          id: 5,
+          instruction: `Continue straight ahead`,
           icon: 'arrow-forward-outline',
           distance: distance * 0.1
         },
-        { 
-          id: 6, 
-          instruction: `${destination.name} will be on your right`, 
+        {
+          id: 6,
+          instruction: `${destination.name} will be on your right`,
           icon: 'location-outline',
           distance: distance * 0.1
         },
       ];
     }
   };
-  
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -147,7 +147,7 @@ const NavigationScreen = ({
           <Text style={styles.headerSubtitle}>To: {destination?.name}</Text>
         </View>
       </View>
-      
+
       {/* Progress information */}
       <View style={styles.progressContainer}>
         <View style={styles.progressInfo}>
@@ -167,23 +167,23 @@ const NavigationScreen = ({
           </View>
         </View>
       </View>
-      
+
       {/* Current step */}
       {steps.length > 0 && (
         <View style={styles.currentStepContainer}>
           <View style={styles.stepIconContainer}>
             <Ionicons name={steps[currentStep].icon} size={32} color="#FFFFFF" />
           </View>
-          <Text style={styles.currentStepText}>{steps[currentStep].instruction}</Text>
+          <Text style={styles.currentStepText}>{`${steps[currentStep].instruction}`}</Text>
         </View>
       )}
-      
+
       {/* Step list */}
       <View style={styles.stepListContainer}>
         <Text style={styles.stepListTitle}>Navigation Steps</Text>
         {steps.map((step, index) => (
-          <View 
-            key={step.id} 
+          <View
+            key={step.id}
             style={[
               styles.stepItem,
               index === currentStep ? styles.activeStepItem : null,
@@ -200,7 +200,7 @@ const NavigationScreen = ({
                 index === currentStep ? styles.activeStepNumberText : null,
                 index < currentStep ? styles.completedStepNumberText : null,
               ]}>
-                {index + 1}
+                {`${index + 1}`}
               </Text>
             </View>
             <View style={styles.stepContent}>
@@ -209,10 +209,10 @@ const NavigationScreen = ({
                 index === currentStep ? styles.activeStepText : null,
                 index < currentStep ? styles.completedStepText : null,
               ]}>
-                {step.instruction}
+                {`${step.instruction}`}
               </Text>
               {step.distance > 0 && (
-                <Text style={styles.stepDistance}>{step.distance.toFixed(1)}m</Text>
+                <Text style={styles.stepDistance}>{`${step.distance.toFixed(1)}m`}</Text>
               )}
             </View>
             {index < currentStep && (
@@ -221,7 +221,7 @@ const NavigationScreen = ({
           </View>
         ))}
       </View>
-      
+
       {/* Cancel button */}
       <TouchableOpacity style={styles.cancelButton} onPress={onBackPress}>
         <Text style={styles.cancelButtonText}>Cancel Navigation</Text>
